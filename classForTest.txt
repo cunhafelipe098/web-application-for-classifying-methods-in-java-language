@@ -1,0 +1,30 @@
+/////////////// return false //////////////////
+
+public class KpiService {
+
+    private <T extends Measurement> void collectMetrics(
+	Plan plan, List<KpiBuilder> builders, MeasurementRepository<T> repository, BiConsumer<KpiBuilder, T> adder
+    ) {
+	Iterable<T> measurements = repository
+	    .findByQuery(
+		new Long[] { plan.getCampaign().getId() },
+		plan.getRoad().getId(),
+		plan.getHeadMilestone(),
+		plan.getTailMilestone(),
+		null,
+		null,
+		Pageable.unpaged()
+	    )
+	    .getContent();
+
+	for (
+	    KpiBuilder builder : builders
+	) {
+	    for (
+		T measurement : measurements
+	    ) {
+		adder.accept(builder, measurement);
+	    }
+	}
+    }
+}
