@@ -1,16 +1,20 @@
-import { ClassifyFunctionCode } from "@/domain/usecases/classify-function-code";
+import { CodeMetricExtractor } from "@/domain/usecases/code-metric-extractor";
+import { ClassifyFunctionCode } from "@/domain/usecases/classifier-code";
 import { Controller, HttpResponse } from "@/presentation/contracts";
+import { FunctionCodeViewModel } from "@/presentation/view-models/function-code";
 
 export class ClassifyFunctionController implements  Controller{
 
-  constructor (private readonly classifyFunctionCode: ClassifyFunctionCode) {}
+  constructor (private readonly codeMetricExtractor: CodeMetricExtractor, private readonly classifyFunctionCode: ClassifyFunctionCode) {}
 
-  async handle (request: any): Promise<HttpResponse> {
+  async handle (request: any): Promise<HttpResponse<FunctionCodeViewModel>> {
     try {
-      const functionCode = await this.classifyFunctionCode.classify(request)
+      const metricExtractor = await this.codeMetricExtractor.extracts({content: request.content, language: request.language, metrics: undefined})
+      const classification = await this.classifyFunctionCode.classify(metricExtractor)
+      
       return {
         statusCode: 200,
-        data: functionCode
+        data: { ...classification, metrics: metricExtractor.metrics}
       }
     } catch (error) {
         return {

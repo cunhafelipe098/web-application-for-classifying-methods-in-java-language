@@ -1,6 +1,6 @@
-import { FunctionCodeModel } from "@/datalayer/models";
-import { FunctionCode } from "@/domain/entities";
+import { ClassifierCodeModel } from "@/datalayer/models";
+import { MetricExtractor } from "@/domain/entities";
 
-export interface ClassifyFunctionCodeIntegration {
-  ClassifyFunctionCode: (functionCode: FunctionCode) => Promise<FunctionCodeModel>
+export interface ClassifyFunction {
+  ClassifyFunction: (metricExtractor: MetricExtractor) => Promise<ClassifierCodeModel>
 }

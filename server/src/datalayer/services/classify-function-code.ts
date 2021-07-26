@@ -1,16 +1,16 @@
-import { FunctionCode } from "@/domain/entities";
-import { ClassifyFunctionCode } from "@/domain/usecases/classify-function-code";
-import { ClassifyFunctionCodeIntegration } from "@/datalayer/contracts";
+import { ClassifierCode, MetricExtractor } from "@/domain/entities";
+import { ClassifyFunctionCode } from "@/domain/usecases/classifier-code";
+import { ClassifyFunction } from "@/datalayer/contracts";
 import { ImpossibleClassify } from "@/domain/errors/impossible-classify";
 
 export class  ClassifyFunctionCodeService implements ClassifyFunctionCode {
 
-  constructor (private readonly classifyFunctionCodeIntegration: ClassifyFunctionCodeIntegration) {}
+  constructor (private readonly classifyFunction: ClassifyFunction) {}
 
-  async classify (functionCode: FunctionCode): Promise<FunctionCode> {
-    if (functionCode.language.name !== 'java') {
+  async classify (metricExtractor: MetricExtractor): Promise<ClassifierCode> {
+    if (metricExtractor.language.name !== 'java') {
       throw new ImpossibleClassify()
     }
-    return this.classifyFunctionCodeIntegration.ClassifyFunctionCode(functionCode)
+    return this.classifyFunction.ClassifyFunction(metricExtractor)
   }
 }

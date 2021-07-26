@@ -2,15 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClassifyFunctionController = void 0;
 class ClassifyFunctionController {
-    constructor(classifyFunctionCode) {
+    constructor(codeMetricExtractor, classifyFunctionCode) {
+        this.codeMetricExtractor = codeMetricExtractor;
         this.classifyFunctionCode = classifyFunctionCode;
     }
     async handle(request) {
         try {
-            const functionCode = await this.classifyFunctionCode.classify(request);
+            const metricExtractor = await this.codeMetricExtractor.extracts({ content: request.content, language: request.language, metrics: undefined });
+            const classification = await this.classifyFunctionCode.classify(metricExtractor);
             return {
                 statusCode: 200,
-                data: functionCode
+                data: { ...classification, metrics: metricExtractor.metrics }
             };
         }
         catch (error) {

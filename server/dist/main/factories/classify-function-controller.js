@@ -2,11 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.makeClassifyFunctionController = void 0;
 const services_1 = require("@/datalayer/services");
-const integration_1 = require("@/infra/integration");
+const extractor_1 = require("@/infra/extractor");
+const classifier_1 = require("@/infra/classifier");
 const controllers_1 = require("@/presentation/controllers");
 const makeClassifyFunctionController = () => {
-    const integration = new integration_1.ExtractClassify();
-    const classify = new services_1.ClassifyFunctionCodeService(integration);
-    return new controllers_1.ClassifyFunctionController(classify);
+    const extractor = new extractor_1.Extractor();
+    const metricExtractor = new services_1.CodeMetricExtractorService(extractor);
+    const classify = new classifier_1.Classify();
+    const classifyFunctionCodeService = new services_1.ClassifyFunctionCodeService(classify);
+    return new controllers_1.ClassifyFunctionController(metricExtractor, classifyFunctionCodeService);
 };
 exports.makeClassifyFunctionController = makeClassifyFunctionController;

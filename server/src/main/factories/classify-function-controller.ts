@@ -1,10 +1,14 @@
 import { Controller } from "@/presentation/contracts";
-import { ClassifyFunctionCodeService } from '@/datalayer/services'
-import { ExtractClassify } from '@/infra/integration'
+import { CodeMetricExtractorService, ClassifyFunctionCodeService } from '@/datalayer/services'
+import { Extractor } from '@/infra/extractor'
+import { Classify } from '@/infra/classifier'
 import { ClassifyFunctionController } from '@/presentation/controllers'
 
 export const makeClassifyFunctionController = (): Controller => {
-  const integration = new ExtractClassify() 
-  const classify = new ClassifyFunctionCodeService(integration)
-  return new ClassifyFunctionController(classify)
+  const extractor = new Extractor() 
+  const metricExtractor = new CodeMetricExtractorService(extractor)
+
+  const classify = new Classify()
+  const classifyFunctionCodeService = new ClassifyFunctionCodeService(classify)
+  return new ClassifyFunctionController(metricExtractor, classifyFunctionCodeService)
 }

@@ -1,6 +1,4 @@
-export type FunctionCode = {
-  language: Language
-  content: string
+export type FunctionCodeViewModel = {
   predictProba: string
   classification: boolean
   metrics: Metric[]

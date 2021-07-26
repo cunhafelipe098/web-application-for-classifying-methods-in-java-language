@@ -3,14 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClassifyFunctionCodeService = void 0;
 const impossible_classify_1 = require("@/domain/errors/impossible-classify");
 class ClassifyFunctionCodeService {
-    constructor(classifyFunctionCodeIntegration) {
-        this.classifyFunctionCodeIntegration = classifyFunctionCodeIntegration;
+    constructor(classifyFunction) {
+        this.classifyFunction = classifyFunction;
     }
-    async classify(functionCode) {
-        if (functionCode.language.name !== 'java') {
+    async classify(metricExtractor) {
+        if (metricExtractor.language.name !== 'java') {
             throw new impossible_classify_1.ImpossibleClassify();
         }
-        return this.classifyFunctionCodeIntegration.ClassifyFunctionCode(functionCode);
+        return this.classifyFunction.ClassifyFunction(metricExtractor);
     }
 }
 exports.ClassifyFunctionCodeService = ClassifyFunctionCodeService;
