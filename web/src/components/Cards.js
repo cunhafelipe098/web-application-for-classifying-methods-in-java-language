@@ -1,6 +1,9 @@
 import React, { Component, useEffect } from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
+import {
+	Table
+} from 'reactstrap';
 
 
 import api from '../services/api'
@@ -11,7 +14,8 @@ export default class Cards extends Component {
     "content": '',
     "language": {"name": "java"},
     "loading": false,
-    "classification": {"classified": false, value: ''}
+    "classification": {"classified": false, value: ''},
+    "metrics": []
   };
 
   handleSubmit = async e => {
@@ -23,9 +27,10 @@ export default class Cards extends Component {
     try {
       const response = await api.post('/function-code/classify',  {
         "language": this.state.language,
-        "content": this.state.content
+        "content": `class GenericClass {${this.state.content}}`
       });
-      await this.setState({ "classification": {"classified": true, value: response.data.classification} });
+      await this.setState({"metrics": response.data.metrics})
+      await this.setState({"classification": {"classified": true, value: response.data.classification} });
        
     } catch (error) {
       console.log("ERROR  --  " + error);
@@ -42,31 +47,37 @@ export default class Cards extends Component {
 
   classificationResult () {
 		if(this.state.classification.classified){
-			return (!this.state.classification.value) ?
-				(
-					<div className="align-self-center" style={{
-						height:30,
-						backgroundColor: "#fab7bc",
-						borderRadius: 4,
-            maxWidth: '1120px',
-            width: '90%',
-            
-						}}>
-						<p style={{ marginTop: "8%", }} >Classificação: Não segue boas praticas de Engenharia de Software</p>
-					</div>
-				)
-				:
-			    (
-
-					<div className="align-self-center" style={{
-						width:100,
-						height:30,
-						backgroundColor: "#aaf683",
-						borderRadius: 4,
-						}}>
-						<p style={{ marginTop: "8%", }} >Classificação: Segue boas praticas de Engenharia de Software</p>
-					</div>
-				);
+			return <div>
+        {(!this.state.classification.value) ?
+          (
+            <div className='cardsClassification' style={{backgroundColor: "#fab7bc"}}>
+              <p style={{marginTop: '15px'}}>Classificação: Não segue boas praticas de Engenharia de Software</p>
+            </div>
+          )
+          :
+            (
+            <div className='cardsClassification' style={{backgroundColor: "#aaf683"}}>
+              <p style={{marginTop: '15px'}}>Classificação: Segue boas praticas de Engenharia de Software</p>
+            </div>
+          )
+        }
+        <Table striped >
+					<thead >
+						<tr>
+              <th>Métrica</th>
+              <th>Valor</th>
+						</tr>
+					</thead>
+					<tbody>
+            {this.state.metrics.map(({name, score}) => {return (
+              <tr>
+                <th>{name}</th>
+                <th>{score}</th>
+              </tr>
+            )})}
+					</tbody>
+				</Table>
+      </div>
 		}
 		return;
 	}
@@ -74,12 +85,19 @@ export default class Cards extends Component {
   render () {
     const { content, loading } = this.state;
     if(loading) {
-      return <div className='Loading'>carregando</div>
+      return (
+        <div className='Loading'>
+        <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div>
+          Classificando a função
+        </div>
+        </div>
+      ) 
     }
     
     return (
       <div className='cards'>
-        <h1>Descrição das etapas que seu código é submetido até a classificação</h1>
+        <h2>Descrição das etapas que seu código é submetido até a classificação</h2>
         <div className='cards__container'>
           <div className='cards__wrapper'>
             <ul className='cards__items'>
@@ -93,6 +111,7 @@ export default class Cards extends Component {
         </div>
   
         <div className='input-areas'>
+          <h2>Teste sua função</h2>
           <form className='inputArea' onSubmit={this.handleSubmit}>
             <textarea
               className='input'
@@ -103,13 +122,9 @@ export default class Cards extends Component {
             />
             <input className='buttonSunmit' type="submit" value="Enviar" />
           </form>
-        </div>
-
-        <div>
-          {this.classificationResult()}
-        </div>
-      </div>
-      
+        </div>    
+        {this.classificationResult()}
+      </div>      
     );
   }
 }

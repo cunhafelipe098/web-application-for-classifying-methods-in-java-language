@@ -1,6 +1,4 @@
-/////////////// return false //////////////////
 
-public class KpiService {
 
     private <T extends Measurement> void collectMetrics(
 	Plan plan, List<KpiBuilder> builders, MeasurementRepository<T> repository, BiConsumer<KpiBuilder, T> adder
@@ -27,4 +25,3 @@ public class KpiService {
 	    }
 	}
     }
-}

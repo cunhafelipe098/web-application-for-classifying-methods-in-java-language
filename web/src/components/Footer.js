@@ -17,7 +17,7 @@ function Footer() {
         </div>
       </div>
       <section class='social-media'>
-        <Link to='/' className='navbar-logo'>
+        <Link to='/' className='navbar-logo' onClick={()=> window.scrollTo(0, 0)}>
           <img width='150' src={'images/unifesp.png'}/>
         </Link>
       </section>
