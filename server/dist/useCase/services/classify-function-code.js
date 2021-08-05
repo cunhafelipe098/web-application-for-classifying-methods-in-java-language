@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClassifyFunctionCodeService = void 0;
-const impossible_classify_1 = require("@/domain/errors/impossible-classify");
+const impossible_classify_1 = require("@/useCase/contracts/errors/impossible-classify");
 class ClassifyFunctionCodeService {
     constructor(classifyFunction) {
         this.classifyFunction = classifyFunction;

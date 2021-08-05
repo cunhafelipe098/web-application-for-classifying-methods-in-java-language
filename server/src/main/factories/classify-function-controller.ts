@@ -1,5 +1,5 @@
 import { Controller } from "@/presentation/contracts";
-import { CodeMetricExtractorService, ClassifyFunctionCodeService } from '@/datalayer/services'
+import { CodeMetricExtractorService, ClassifyFunctionCodeService } from '@/useCase/services'
 import { Extractor } from '@/infra/extractor'
 import { Classify } from '@/infra/classifier'
 import { ClassifyFunctionController } from '@/presentation/controllers'

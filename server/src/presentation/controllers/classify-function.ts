@@ -1,5 +1,5 @@
-import { CodeMetricExtractor } from "@/domain/usecases/code-metric-extractor";
-import { ClassifyFunctionCode } from "@/domain/usecases/classifier-code";
+import { CodeMetricExtractor } from "@/useCase/contracts/usecases/code-metric-extractor";
+import { ClassifyFunctionCode } from "@/useCase/contracts/usecases/classifier-code";
 import { Controller, HttpResponse } from "@/presentation/contracts";
 import { FunctionCodeViewModel } from "@/presentation/view-models/function-code";
 

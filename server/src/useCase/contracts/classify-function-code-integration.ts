@@ -1,5 +1,5 @@
-import { ClassifierCodeModel } from "@/datalayer/models";
-import { MetricExtractor } from "@/domain/entities";
+import { ClassifierCodeModel } from "@/useCase/models";
+import { MetricExtractor } from "@/useCase/contracts/entities";
 
 export interface ClassifyFunction {
   ClassifyFunction: (metricExtractor: MetricExtractor) => Promise<ClassifierCodeModel>

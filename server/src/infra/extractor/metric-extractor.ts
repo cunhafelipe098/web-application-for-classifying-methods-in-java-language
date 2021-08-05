@@ -1,6 +1,6 @@
-import { MetricExtractor } from "@/domain/entities";
-import { MetricExtractorModel } from "@/datalayer/models"; 
-import { ExtractMetrics } from "@/datalayer/contracts";
+import { MetricExtractor } from "@/useCase/contracts/entities";
+import { MetricExtractorModel } from "@/useCase/models"; 
+import { ExtractMetrics } from "@/useCase/contracts";
 
 const util = require('util');
 var exec = util.promisify(require('child_process').exec);

@@ -1,7 +1,7 @@
-import { ClassifierCode, MetricExtractor } from "@/domain/entities";
-import { ClassifyFunctionCode } from "@/domain/usecases/classifier-code";
-import { ClassifyFunction } from "@/datalayer/contracts";
-import { ImpossibleClassify } from "@/domain/errors/impossible-classify";
+import { ClassifierCode, MetricExtractor } from "@/useCase/contracts/entities";
+import { ClassifyFunctionCode } from "@/useCase/contracts/usecases/classifier-code";
+import { ClassifyFunction } from "@/useCase/contracts";
+import { ImpossibleClassify } from "@/useCase/contracts/errors/impossible-classify";
 
 export class  ClassifyFunctionCodeService implements ClassifyFunctionCode {
 

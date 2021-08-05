@@ -1,6 +1,6 @@
-import { ClassifyFunction } from "@/datalayer/contracts";
-import { MetricExtractor } from "@/domain/entities";
-import { ClassifierCodeModel } from "@/datalayer/models"; 
+import { ClassifyFunction } from "@/useCase/contracts";
+import { MetricExtractor } from "@/useCase/contracts/entities";
+import { ClassifierCodeModel } from "@/useCase/models"; 
 
 const util = require('util');
 var exec = util.promisify(require('child_process').exec);

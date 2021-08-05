@@ -1,27 +1,60 @@
 
+// ex Eng
+public static String replaceString(String str, String oldStr, String newStr) {
 
-    private <T extends Measurement> void collectMetrics(
-	Plan plan, List<KpiBuilder> builders, MeasurementRepository<T> repository, BiConsumer<KpiBuilder, T> adder
-    ) {
-	Iterable<T> measurements = repository
-	    .findByQuery(
-		new Long[] { plan.getCampaign().getId() },
-		plan.getRoad().getId(),
-		plan.getHeadMilestone(),
-		plan.getTailMilestone(),
-		null,
-		null,
-		Pageable.unpaged()
-	    )
-	    .getContent();
+		String retValue = str.replace(oldStr, newStr);
+		return retValue;
 
-	for (
-	    KpiBuilder builder : builders
-	) {
-	    for (
-		T measurement : measurements
-	    ) {
-		adder.accept(builder, measurement);
-	    }
+}
+
+/ex NonEng
+
+public static String replaceStr(String strSrc, String strOld, String strNew) {
+		if (strSrc == null)
+			return null;
+
+		char srcBuff[] = strSrc.toCharArray();
+		int nSrcLen = srcBuff.length;
+
+		if (nSrcLen == 0)
+			return "";
+		char oldStrBuff[] = strOld.toCharArray();
+		
+		int nOldStrLen = oldStrBuff.length;
+
+		if (nOldStrLen == 0 || nOldStrLen > nSrcLen)
+			return strSrc;
+
+		StringBuffer retBuff = new StringBuffer(nSrcLen * (1 + strNew.length() / nOldStrLen));
+		boolean bIsFound = false;
+
+		for (int i = 0; i < nSrcLen;) {
+			bIsFound = false;
+			if (srcBuff[i] == oldStrBuff[0]) {
+				int j;
+
+				for (j = 1; j < nOldStrLen && i + j < nSrcLen && srcBuff[i + j] == oldStrBuff[j]; j++)
+					bIsFound = (j == nOldStrLen);
+
+			}
+			if (bIsFound) {
+				retBuff.append(strNew);
+				i += nOldStrLen;
+			} else {
+				int nSkipTo;
+
+				if (i + nOldStrLen >= nSrcLen)
+					nSkipTo = nSrcLen - 1;
+				else
+					nSkipTo = i;
+
+				while (i <= nSkipTo) {
+					retBuff.append(srcBuff[i]);
+					i++;
+				}
+			}
+		}
+		srcBuff = null;
+		oldStrBuff = null;
+		return retBuff.toString();
 	}
-    }

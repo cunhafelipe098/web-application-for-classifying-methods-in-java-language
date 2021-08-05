@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CodeMetricExtractorService = void 0;
-const errors_1 = require("@/domain/errors");
+const errors_1 = require("@/useCase/contracts/errors");
 class CodeMetricExtractorService {
     constructor(metricExtractor) {
         this.metricExtractor = metricExtractor;

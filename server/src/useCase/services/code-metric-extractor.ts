@@ -1,7 +1,7 @@
-import { MetricExtractor } from "@/domain/entities";
-import { ImpossibleExtract } from "@/domain/errors";
-import { CodeMetricExtractor } from "@/domain/usecases/code-metric-extractor";
-import { ExtractMetrics } from "@/datalayer/contracts";
+import { MetricExtractor } from "@/useCase/contracts/entities";
+import { ImpossibleExtract } from "@/useCase/contracts/errors";
+import { CodeMetricExtractor } from "@/useCase/contracts/usecases/code-metric-extractor";
+import { ExtractMetrics } from "@/useCase/contracts";
 
 export class CodeMetricExtractorService implements CodeMetricExtractor {
 
