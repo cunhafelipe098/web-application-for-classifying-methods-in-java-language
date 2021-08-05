@@ -10,7 +10,7 @@ function CardItem(props) {
             <img
               className='cards__item__img'
               alt='Etapas da classificação do código'
-              src={props.src}
+              src={'images/ciclodeVidadarequisicao.png'}
             />
           </figure>
           <div className='cards__item__info'>
