@@ -61,18 +61,20 @@ export default class Cards extends Component {
             </div>
           )
         }
-        <Table striped >
+        <Table className='resultTable' striped >
 					<thead >
 						<tr>
               <th>Métrica</th>
               <th>Valor</th>
+              <th>Descrição</th>
 						</tr>
 					</thead>
 					<tbody>
-            {this.state.metrics.map(({name, score}) => {return (
+            {this.state.metrics.map(({name, score, description}) => {return (
               <tr>
                 <th>{name}</th>
                 <th>{score}</th>
+                <th>{description}</th>
               </tr>
             )})}
 					</tbody>

@@ -66,6 +66,15 @@
   height: 40px;
 }
 
+.resultTable {
+  max-width: 1120px;
+  align-self:center;
+  margin:auto;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
 .input {
   padding: 8px 20px;
   border-radius: 2px;

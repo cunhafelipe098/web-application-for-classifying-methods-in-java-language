@@ -11,4 +11,5 @@ type Language = {
 type Metric = {
   name: string 
   score: number
+  description: string
 }
