@@ -105,7 +105,7 @@ export default class Cards extends Component {
             <ul className='cards__items'>
               <CardItem
                 src=''
-                text='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+                text='O usuário submete sua função pelo front-end através de um input de texto, esse dado é enviado ao back-end pelo cliente http. No back-end a requisição é tratada e então submetida ao módulo de extração de métricas que retorna uma coleção de métricas com seus respectivos valores. Em seguida, as métricas de software são fornecidas ao classificador que retorna a classificação da função. Após a classificação, a requisição é respondida contendo a classificação da função e as métricas. Por fim essas informações são apresentadas na tela para o usuário.'
                 path='/'
               />
             </ul>
